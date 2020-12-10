@@ -6,13 +6,18 @@
  //@param {number} number1
  //@param {number} number2
  //@return {number} product
+
+let num1 = prompt('Can you give me a number?');
+let num2 = prompt('One more number please');
+let product = 0;
+
 const multiplication = () => {
-  return
+ for (let i = 0; i < num2; i ++) {
+  product += parseInt(num1);
 }
-
+  return product
+};
 const answer1 = multiplication()
-console.log('answer1', answer1)
-
 const htmlTarget = document.getElementById('a-1')
 htmlTarget.innerHTML = answer1
 
@@ -25,12 +30,30 @@ htmlTarget.innerHTML = answer1
 
 //@param {string}
 //@return {character} => array of characters
+
+
+const regConsonants = /[^aeiou]/gi; 
+const regVowels = /[aeiou]/gi;
+
+let word = prompt("what's your favorite word?");
+let question = prompt('would you like the vowels first or consonants?').toLowerCase();
+
+let consonants = word.match(regConsonants);
+let vowels = word.match(regVowels);
+
 vowelOrConsonant = () => {
-  return
+if (question === 'consonants') {
+ let concatenated = [...consonants, ...vowels]
+  return concatenated.join('')
+
+} else { 
+  let concatenated = [...vowels, ...consonants]
+  return concatenated.join('');
+
 }
+};
 
 const answer2 = vowelOrConsonant()
-
 const htmlTarget2 = document.getElementById('a-2')
 htmlTarget2.innerHTML = answer2
 
@@ -45,9 +68,29 @@ htmlTarget2.innerHTML = answer2
 //where: name, saves the name of the player. Lives, represents the remaining oportunities each time the player fails. Fail_numbers, is an array of numbers that stores the fail numbers the player has used
 
 //@return {string} win / gameOver => the string that says if the user wasted the three oportunities showing the fails numbers or the name if the player wins
-guessTheNumber  = () => {
-  return
+let player = {
+  name: prompt("What's your name?"),
+  lives: 3,
+  faild_number : []
 }
+
+let randomNumber = Math.floor(Math.random() * 50 ) + 10;
+
+guessTheNumber  = () => {
+for ( let i = 0; i < 3; i ++) {
+  let number = prompt('Please provide a number between 10 - 50')
+  player.lives -= 1;
+
+  if (parseInt(number) === randomNumber)  {
+    alert (`${player.name.toUpperCase()} YOU GOT IT RIGHT!`)
+    return (`${player.name.toUpperCase()} YOU WON! ${randomNumber} is correct!`)
+    break;
+    }  
+    player.faild_number.push(number) 
+  }
+    return (`Sorry ${player.name} ${player.faild_number.join(', ')} were wrong. The correct number is ${randomNumber}.`)
+    
+  };
 
 const answer3 = guessTheNumber()
 
@@ -62,8 +105,9 @@ htmlTarget3.innerHTML = answer3
 //example: if the user select sorting by title the return value must be: "Mockingjay: The Final Book of The Hunger Games; Walter Isaacson; The Road Ahead"
 
 sort = () => {
-
-  var library = [
+  let userOption = prompt('How would you like your library sorted by the author, title, or libraryID?').toLowerCase();
+  let newLibrary = [];
+  let library = [
    {
        title:  'The Road Ahead',
        author: 'Bill Gates',
@@ -80,9 +124,23 @@ sort = () => {
        libraryID: 3245
    }];
 
-  return
+for (product in library) {
+  if (userOption === 'title') {
+    newLibrary.push(library[product].title)
 }
+   if ( userOption === 'author' ) {
+    newLibrary.push(library[product].author)
+}
+   if ( userOption === 'libraryID'){
+    newLibrary.push(library[product].libraryID)
+}
+if (newLibrary.length === library.length){
+return `${newLibrary.sort().reverse().join(',  ')}`
+}
+};
 
+return `${newLibrary.sort().join(',  ')}`
+}
 const answer4 = sort()
 
 const htmlTarget4 = document.getElementById('a-4')
